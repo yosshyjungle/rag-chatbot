@@ -11,7 +11,13 @@ const {
   OPENAI_API_KEY,
 } = process.env;
 
+if (!OPENAI_API_KEY) {
+  throw new Error("OPENAI_API_KEY is not set"); // APIキーが設定されていない場合のエラーハンドリング
+}
+
 const openAIClient = new OpenAI({ apiKey: OPENAI_API_KEY });
+
+
 
 const client = new DataAPIClient(ASTRA_DB_APPLICATION_TOKEN);
 const db = client.db(ASTRA_DB_API_ENDPOINT!, { namespace: ASTRA_DB_NAMESPACE });
